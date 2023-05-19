@@ -22,7 +22,7 @@ namespace WebMVC.Controllers
 
         public async Task<IActionResult> Index()
         {
-            /*
+            
             DataTable dt = new DataTable();
             using (var client = new HttpClient())
             {
@@ -44,8 +44,8 @@ namespace WebMVC.Controllers
 
                 ViewData.Model = dt;
             }
-            */
-            ViewData.Model = _userApi.GetAllUsers();
+            
+            //ViewData.Model = _userApi.GetAllUsers();
             return View();
         }
 
