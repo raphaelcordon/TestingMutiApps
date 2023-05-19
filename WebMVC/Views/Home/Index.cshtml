@@ -1,0 +1,59 @@
+﻿@using System.Data
+@model DataTable
+
+
+@{
+	ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+	<h1 class="display-4">Listing Registered Users</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>@Html.DisplayName("Name")</th>
+				<th>@Html.DisplayName("Surname")</th>
+				<th>@Html.DisplayName("Date Of Birth")</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (DataRow row in Model.Rows)
+			{
+				<tr>
+					<td>@row["FirstName"]</td>
+					<td>@row["LastName"]</td>
+					<td>@row["DateOfBirth"].ToString().Substring(0, 10)</td>
+					<td>
+						<button type="button" class="btn btn-secondary btn-sm">Update</button>
+						<button type="button" class="btn btn-danger btn-sm">Delete</button>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+	<br />
+	<hr />
+	<h2 class="display-4">Register a new User:</h2>
+	<form>
+		<table class="table">
+			<thead>
+				<tr>
+					<th><label for="FirstName">First Name</label></th>
+					<th><label for="LasttName">Last Name:</label></th>
+					<th><label for="DateOfBirth">Date Of Birth:</label></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><input type="text" id="FirstName" name="FirstName"></td>
+					<td><input type="text" id="LastName" name="LastName"></td>
+					<td><input type="date" id="DateOfBirth" name="DateOfBirth"></td>
+					<td><button type="button" class="btn btn-dark btn-sm">Register</button></td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+	<hr />
+</div>
