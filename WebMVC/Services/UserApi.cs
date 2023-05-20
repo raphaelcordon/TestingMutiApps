@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System.Collections;
-using System.Data;
 using System.Net.Http.Headers;
+using WebMVC.Models;
 
 namespace WebMVC.Services
 {
@@ -13,9 +12,9 @@ namespace WebMVC.Services
             
         }
 
-        public async Task<DataTable?> GetAllUsers()
+        public async Task<IList<ReadUserFromApi>> GetAllUsers()
 		{
-			DataTable dt = new DataTable();
+			IList<ReadUserFromApi> user = new List<ReadUserFromApi>();
 			using (var client = new HttpClient())
 			{
 				client.BaseAddress = new Uri(baseUrl);
@@ -27,14 +26,14 @@ namespace WebMVC.Services
 				if (getData.IsSuccessStatusCode)
 				{
 					string results = getData.Content.ReadAsStringAsync().Result;
-					dt = JsonConvert.DeserializeObject<DataTable>(results);
+					user = JsonConvert.DeserializeObject<List<ReadUserFromApi>>(results);
 				}
 				else
 				{
 					Console.WriteLine("Error calling web Api");
 				}
 			}
-            return dt;
+			return (IList<ReadUserFromApi>)Task.FromResult(user);
 		}
     }
 }
