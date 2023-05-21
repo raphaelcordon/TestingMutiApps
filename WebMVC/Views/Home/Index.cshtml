@@ -24,8 +24,9 @@
 					<td>@row.LastName</td>
 					<td>@row.DateOfBirth.ToString().Substring(0, 10)</td>
 					<td>
-						<button type="button" class="btn btn-secondary btn-sm">Update</button>
-						<button type="button" class="btn btn-danger btn-sm">Delete</button>
+						<button type="button" class="btn btn-secondary btn-sm" id="@row.Id">Update</button>
+						<a asp-controller="Users" asp-action="DeleteUser" asp-route-id="@row.Id">
+						<button type="button" class="btn btn-danger btn-sm">Delete</button></a>
 					</td>
 				</tr>
 			}

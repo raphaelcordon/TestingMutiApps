@@ -4,13 +4,15 @@ using WebMVC.Models;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using WebMVC.Services;
+using System.Net;
+using System.Text;
 
 namespace WebMVC.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        string baseUrl = "https://localhost:7148";
+        string baseUrl = "https://localhost:7148/api/";
         private UserApi _userApi;
 
         public HomeController(ILogger<HomeController> logger, UserApi userApi)
@@ -21,31 +23,10 @@ namespace WebMVC.Controllers
 
         public async Task<IActionResult> Index()
         {
-			/*
-            IList<ReadUserFromApi> user = new List<ReadUserFromApi>();
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(baseUrl);
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            var users = await _userApi.GetAllUsers();
 
-                HttpResponseMessage getData = await client.GetAsync("User");
-
-                if (getData.IsSuccessStatusCode)
-                {
-                    string results = getData.Content.ReadAsStringAsync().Result;
-                    user = JsonConvert.DeserializeObject<List<ReadUserFromApi>>(results);
-                }
-                else
-                {
-                    Console.WriteLine("Error calling web Api");
-                }
-
-                ViewData.Model = user;
-            }
-            */
-			ViewData.Model = await _userApi.GetAllUsers();
-            return View();
+            ViewData.Model = users;
+			return View();
         }
 
         public IActionResult Privacy()

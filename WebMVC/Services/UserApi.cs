@@ -6,7 +6,7 @@ namespace WebMVC.Services
 {
 	public class UserApi
 	{
-		string baseUrl = "https://localhost:7148";
+		string baseUrl = "https://localhost:7148/api/";
         public UserApi()
         {
             
@@ -33,7 +33,8 @@ namespace WebMVC.Services
 					Console.WriteLine("Error calling web Api");
 				}
 			}
-			return (IList<ReadUserFromApi>)Task.FromResult(user);
+
+			return user;
 		}
     }
 }
