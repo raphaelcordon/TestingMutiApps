@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ReadUserFromApi>
+﻿@model IEnumerable<ReadUserApi>
 
 
 @{
@@ -35,7 +35,7 @@
 	<br />
 	<hr />
 	<h2 class="display-4">Register a new User:</h2>
-	<form>
+	<form id="createUser", action="registerNewUser" method="post">
 		<table class="table">
 			<thead>
 				<tr>
@@ -50,10 +50,12 @@
 					<td><input type="text" id="FirstName" name="FirstName"></td>
 					<td><input type="text" id="LastName" name="LastName"></td>
 					<td><input type="date" id="DateOfBirth" name="DateOfBirth"></td>
-					<td><button type="button" class="btn btn-dark btn-sm">Register</button></td>
+					<td><button type="button" class="btn btn-dark btn-sm" id="btnCreateUser">Register</button></td>
 				</tr>
 			</tbody>
 		</table>
 	</form>
 	<hr />
 </div>
+
+

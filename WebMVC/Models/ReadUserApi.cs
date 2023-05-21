@@ -1,7 +1,7 @@
 ﻿
 namespace WebMVC.Models
 {
-    public class ReadUserFromApi
+    public class ReadUserApi
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System.Net.Http.Headers;
 using WebMVC.Models;
 using WebMVC.Services;
 
@@ -8,7 +6,6 @@ namespace WebMVC.Controllers
 {
 	public class UsersController : Controller
 	{
-		string baseUrl = "https://localhost:7148/api/";
 		private UserApi _userApi;
 
         public UsersController(UserApi userApi)
@@ -19,14 +16,22 @@ namespace WebMVC.Controllers
 		[Route("User/DeleteUser/{id:int}")]
 		public async Task<IActionResult> DeleteUser(int id)
         {
-			using (var client = new HttpClient())
-			{
-				client.BaseAddress = new Uri(baseUrl + Convert.ToString(id));
-
-				var response = await client.DeleteAsync("User");
-			}
+			_userApi.DeleteUser(id);
 			return RedirectToAction("Index", "Home");
-		
         }
-    }
+
+		[Route("User/CreateUser")]
+		public async Task<IActionResult> CreateUser([FromBody] CreateUserApi user)
+		{
+			_userApi.CreateUser(user);
+			return RedirectToAction("Index", "Home");
+		}
+
+		[Route("User/UpdateUser")]
+		public async Task<IActionResult> UpdateUser([FromBody] UpdateUserApi user)
+		{
+			_userApi.UpdateUser(user);
+			return RedirectToAction("Index", "Home");
+		}
+	}
 }
