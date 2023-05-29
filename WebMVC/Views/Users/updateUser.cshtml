@@ -1,0 +1,29 @@
+﻿@model ReadUserApi
+@{
+	ViewData["Title"] = "Update Users";
+}
+
+<h2 class="display-4">Update the User:</h2>
+<table class="table">
+	<thead>
+		<tr>
+			<th><label for="FirstName">First Name</label></th>
+			<th><label for="LasttName">Last Name:</label></th>
+			<th><label for="DateOfBirth">Date Of Birth:</label></th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<form id="postupdateUser" action="UpdateUser" method="post" enctype="multipart/form-data">
+			<td><input type="hidden" id="Id" name="Id" value="@Model.Id" />
+			<td><input type="text" id="FirstName" name="FirstName" value="@Model.FirstName" /></td>
+			<td><input type="text" id="LastName" name="LastName" value="@Model.LastName" /></td>
+			<td><input type="date" id="DateOfBirth" name="DateOfBirth" @Model.DateOfBirth /></td>
+			<td><button type="button" class="btn btn-dark btn-sm" id="btnUpdateUser">Update</button></td>
+			</form>
+		</tr>
+	</tbody>
+</table>
+
+

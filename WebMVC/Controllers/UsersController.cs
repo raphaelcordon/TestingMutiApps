@@ -27,11 +27,21 @@ namespace WebMVC.Controllers
 			return RedirectToAction("Index", "Home");
 		}
 
-		[Route("User/UpdateUser")]
-		public async Task<IActionResult> UpdateUser([FromBody] UpdateUserApi user)
+		[Route("User/UpdateUser/{id:int}")]
+		public IActionResult UpdateUser(int id)
 		{
-			_userApi.UpdateUser(user);
+			var user =  _userApi.UpdateUser(id);
+			ViewData.Model = user;
+			return View();
+		}
+		
+		/*
+		[Route("User/postUpdateUser")]
+		public async Task<IActionResult> PostUpdateUser([FromBody] UpdateUserApi user)
+		{
+			_userApi.PostUpdateUser(user);
 			return RedirectToAction("Index", "Home");
 		}
+		*/
 	}
 }

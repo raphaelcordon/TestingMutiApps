@@ -24,9 +24,12 @@
 					<td>@row.LastName</td>
 					<td>@row.DateOfBirth.ToString().Substring(0, 10)</td>
 					<td>
-						<button type="button" class="btn btn-secondary btn-sm" id="@row.Id">Update</button>
+						<a asp-controller="Users" asp-action="UpdateUser" asp-route-id="@row.Id">
+							<button type="button" class="btn btn-secondary btn-sm">Update</button>
+						</a>
 						<a asp-controller="Users" asp-action="DeleteUser" asp-route-id="@row.Id">
-						<button type="button" class="btn btn-danger btn-sm">Delete</button></a>
+							<button type="button" class="btn btn-danger btn-sm">Delete</button>
+						</a>
 					</td>
 				</tr>
 			}
@@ -35,27 +38,26 @@
 	<br />
 	<hr />
 	<h2 class="display-4">Register a new User:</h2>
-	<form id="createUser", action="registerNewUser" method="post">
-		<table class="table">
-			<thead>
-				<tr>
-					<th><label for="FirstName">First Name</label></th>
-					<th><label for="LasttName">Last Name:</label></th>
-					<th><label for="DateOfBirth">Date Of Birth:</label></th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td><input type="text" id="FirstName" name="FirstName"></td>
-					<td><input type="text" id="LastName" name="LastName"></td>
-					<td><input type="date" id="DateOfBirth" name="DateOfBirth"></td>
-					<td><button type="button" class="btn btn-dark btn-sm" id="btnCreateUser">Register</button></td>
-				</tr>
-			</tbody>
-		</table>
-	</form>
+	<table class="table">
+		<thead>
+			<tr>
+				<th><label for="FirstName">First Name</label></th>
+				<th><label for="LasttName">Last Name:</label></th>
+				<th><label for="DateOfBirth">Date Of Birth:</label></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<form id="createUser" action="registerNewUser" method="post" enctype="multipart/form-data">
+				<td><input type="text" id="FirstName" name="FirstName" required /></td>
+				<td><input type="text" id="LastName" name="LastName" required /></td>
+				<td><input type="date" id="DateOfBirth" name="DateOfBirth" required /></td>
+				<td><button type="button" class="btn btn-dark btn-sm" id="btnCreateUser">Register</button></td>
+				</form>
+			</tr>
+		</tbody>
+	</table>
+
 	<hr />
 </div>
-
-

@@ -12,12 +12,13 @@
                 'DateOfBirth': createUser.DateOfBirth.value
             })
         });
+
     });
 
     $("#btnUpdateUser").on("click", function () {
         $.ajax({
             type: 'POST',
-            url: 'User/UpdateUser',
+            url: 'User/PostUpdateUser',
             contentType: 'application/json',
             dataType: 'json',
             data: JSON.stringify({
