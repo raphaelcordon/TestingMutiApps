@@ -13,35 +13,34 @@ namespace WebMVC.Controllers
             _userApi = userApi;
         }
 
-		[Route("User/DeleteUser/{id:int}")]
 		public async Task<IActionResult> DeleteUser(int id)
         {
-			_userApi.DeleteUser(id);
+			await _userApi.DeleteUser(id);
 			return RedirectToAction("Index", "Home");
         }
 
-		[Route("User/CreateUser")]
 		public async Task<IActionResult> CreateUser([FromBody] CreateUserApi user)
 		{
-			_userApi.CreateUser(user);
+			await _userApi.CreateUser(user);
 			return RedirectToAction("Index", "Home");
 		}
 
-		[Route("User/UpdateUser/{id:int}")]
-		public IActionResult UpdateUser(int id)
+
+		public async Task<IActionResult> UpdateUser(int id)
 		{
-			var user =  _userApi.UpdateUser(id);
+			var user = await  _userApi.GetOneUser(id);
 			ViewData.Model = user;
 			return View();
 		}
-		
-		/*
-		[Route("User/postUpdateUser")]
+
+		[HttpPost]
 		public async Task<IActionResult> PostUpdateUser([FromBody] UpdateUserApi user)
 		{
-			_userApi.PostUpdateUser(user);
+			await _userApi.UpdateUser(user);
 			return RedirectToAction("Index", "Home");
 		}
-		*/
+		
+
+		
 	}
 }

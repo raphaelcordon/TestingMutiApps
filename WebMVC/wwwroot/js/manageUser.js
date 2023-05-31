@@ -18,16 +18,15 @@
     $("#btnUpdateUser").on("click", function () {
         $.ajax({
             type: 'POST',
-            url: 'User/PostUpdateUser',
+            url: '/User/PostUpdateUser',
             contentType: 'application/json',
             dataType: 'json',
             data: JSON.stringify({
-                'Id': updateUser.updateId.value,
-                'FirstName': updateUser.updateFirstName.value,
-                'LastName': updateUser.updateLastName.value,
-                'DateOfBirth': updateUser.updateDateOfBirth.value
+                'Id': parseInt(PostUpdateUser.Id.value),
+                'FirstName': PostUpdateUser.FirstName.value,
+                'LastName': PostUpdateUser.LastName.value,
+                'DateOfBirth': Date.parse(PostUpdateUser.DateOfBirth.value)
             })
-        });
+        }); 
     });
-
 });

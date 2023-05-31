@@ -53,29 +53,31 @@ namespace WebMVC.Services
 			response.EnsureSuccessStatusCode();
 		}
 
-		public async Task<UpdateUserApi> UpdateUser(int id)
+		public async Task<ReadUserApi> GetOneUser(int id)
 		{
-			UpdateUserApi user = new();
+			ReadUserApi user = new();
 			HttpResponseMessage getData = await _httpClient.GetAsync($"User/{id}");
 
 			if (getData.IsSuccessStatusCode)
 			{
-				string result = getData.Content.ReadAsStringAsync().Result;
-				user = JsonConvert.DeserializeObject<UpdateUserApi>(result);
-			}
+				var result = getData.Content.ReadAsStringAsync().Result;
+
+                
+                user = JsonConvert.DeserializeObject<ReadUserApi>(result);
+            }
 			else
 			{
 				Console.WriteLine("Error calling web Api");
 			};
 			return user;
 		}
-		/*public async Task PostUpdateUser(UpdateUserApi user)
+
+		public async Task UpdateUser(UpdateUserApi user)
 		{
 			var userSerialized = JsonConvert.SerializeObject(user);
 			var requestContent = new StringContent(userSerialized, Encoding.UTF8, "application/json");
 			HttpResponseMessage response = await _httpClient.PostAsync("User", requestContent);
 			response.EnsureSuccessStatusCode();
 		}
-		*/
 	}
 }
