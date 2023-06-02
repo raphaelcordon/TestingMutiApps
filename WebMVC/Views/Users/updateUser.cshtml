@@ -15,16 +15,20 @@
 	</thead>
 	<tbody>
 		<tr>
-			<form id="PostUpdateUser" action="PostUpdateUser" method="post" enctype="multipart/form-data">
-			<td><input type="hidden" id="Id" name="Id" value="@Model.Id" />
+			<form id="updateUser" action="PostUpdateUser" method="post" enctype="multipart/form-data">
+				<input type="hidden" id="Id" name="Id" value="@Model.Id" />
 			<td><input type="text" id="FirstName" name="FirstName" value="@Model.FirstName" /></td>
 			<td><input type="text" id="LastName" name="LastName" value="@Model.LastName" /></td>
-					@{
-						var dob = $"{@Model.DateOfBirth.Year}-{@Model.DateOfBirth.Month}-{@Model.DateOfBirth.Day}";
-					}
+				@{
+					var month = @Model.DateOfBirth.Month.ToString().PadLeft(2, '0');
+					var day = @Model.DateOfBirth.Day.ToString().PadLeft(2, '0');
+					var dob = $"{@Model.DateOfBirth.Year}-{month}-{day}";
+				}
 			<td><input type="date" id="DateOfBirth" name="DateOfBirth" value="@dob" /></td>
 			<td><button type="button" class="btn btn-dark btn-sm" id="btnUpdateUser">Update</button></td>
 			</form>
 		</tr>
 	</tbody>
 </table>
+<div>
+</div>

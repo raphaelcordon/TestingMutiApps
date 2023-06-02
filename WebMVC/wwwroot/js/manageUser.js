@@ -3,30 +3,36 @@
     $("#btnCreateUser").on("click", function () {
         $.ajax({
             type: 'POST',
-            url: 'User/CreateUser',
+            url: '/Users/CreateUser',
             contentType: 'application/json',
             dataType: 'json',
             data: JSON.stringify({
                 'FirstName': createUser.FirstName.value,
                 'LastName': createUser.LastName.value,
                 'DateOfBirth': createUser.DateOfBirth.value
-            })
+            }),
+            success: function (response) {
+                window.location.href = response.redirectToUrl;
+            }
         });
 
     });
 
     $("#btnUpdateUser").on("click", function () {
         $.ajax({
-            type: 'POST',
-            url: '/User/PostUpdateUser',
+            type: 'PUT',
+            url: '/Users/PostUpdateUser',
             contentType: 'application/json',
             dataType: 'json',
             data: JSON.stringify({
-                'Id': parseInt(PostUpdateUser.Id.value),
-                'FirstName': PostUpdateUser.FirstName.value,
-                'LastName': PostUpdateUser.LastName.value,
-                'DateOfBirth': Date.parse(PostUpdateUser.DateOfBirth.value)
-            })
+                'Id': updateUser.Id.value,
+                'FirstName': updateUser.FirstName.value,
+                'LastName': updateUser.LastName.value,
+                'DateOfBirth': updateUser.DateOfBirth.value
+            }),
+            success: function (response) {
+                window.location.href = response.redirectToUrl;
+            }
         }); 
     });
 });

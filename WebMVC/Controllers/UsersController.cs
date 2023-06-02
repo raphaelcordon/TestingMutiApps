@@ -4,6 +4,7 @@ using WebMVC.Services;
 
 namespace WebMVC.Controllers
 {
+	
 	public class UsersController : Controller
 	{
 		private UserApi _userApi;
@@ -19,10 +20,11 @@ namespace WebMVC.Controllers
 			return RedirectToAction("Index", "Home");
         }
 
+		[Route("Users/CreateUser")]
 		public async Task<IActionResult> CreateUser([FromBody] CreateUserApi user)
 		{
 			await _userApi.CreateUser(user);
-			return RedirectToAction("Index", "Home");
+			return Json( new { redirectToUrl = Url.Action("Index", "Home") });
 		}
 
 
@@ -33,14 +35,10 @@ namespace WebMVC.Controllers
 			return View();
 		}
 
-		[HttpPost]
 		public async Task<IActionResult> PostUpdateUser([FromBody] UpdateUserApi user)
 		{
 			await _userApi.UpdateUser(user);
-			return RedirectToAction("Index", "Home");
+			return Json(new { redirectToUrl = Url.Action("Index", "Home") });
 		}
-		
-
-		
 	}
 }

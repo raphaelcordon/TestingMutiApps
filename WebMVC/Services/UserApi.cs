@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -10,7 +11,7 @@ namespace WebMVC.Services
 	public class UserApi
 	{
 		string baseUrl = "https://localhost:7148/api/";
-		HttpClient _httpClient = new HttpClient();
+		internal HttpClient _httpClient = new HttpClient();
 
 		public UserApi()
 		{
@@ -75,8 +76,9 @@ namespace WebMVC.Services
 		public async Task UpdateUser(UpdateUserApi user)
 		{
 			var userSerialized = JsonConvert.SerializeObject(user);
-			var requestContent = new StringContent(userSerialized, Encoding.UTF8, "application/json");
-			HttpResponseMessage response = await _httpClient.PostAsync("User", requestContent);
+            await Console.Out.WriteLineAsync(	userSerialized);
+            var requestContent = new StringContent(userSerialized, Encoding.UTF8, "application/json");
+			HttpResponseMessage response = await _httpClient.PutAsync("User", requestContent);
 			response.EnsureSuccessStatusCode();
 		}
 	}
